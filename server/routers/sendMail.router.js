@@ -6,7 +6,7 @@ var mailController = require('../controller/mail.controller');
 router.get('/', function(req, res){
     res.render('../views/mail');
 });
-router.post('/email', mailController.sendMail);
+router.post('/', mailController.sendMail);
 
 
 

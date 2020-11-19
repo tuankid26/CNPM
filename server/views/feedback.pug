@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    //- p #{data[0].time}
+    
+    //- each row in data
+    //-     p #{row.id}
+    .container
+        form(action = '/feedbacks', method = 'get')
+            button.btn.btn-primary Thêm phản hồi
+        table.table(center)
+            thead
+                tr
+                th(scope='col') #
+                th(scope='col') First
+                th(scope='col') Last
+                th(scope='col') Handle
+            tbody
+                each row in data
+                    tr
+                        th(scope='row') #{row.id}
+                        td #{row.noiDung}
+                        td #{row.time}
+                        td #{row.status}
+                    tr
+            //- th(scope='row') 2
+            //- td Jacob
+            //- td Thornton
+            //- td @fat
+            //- tr
+            //- th(scope='row') 3
+            //- td Larry
+            //- td the Bird
+            //- td @twitter

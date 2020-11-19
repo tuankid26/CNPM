@@ -1,0 +1,20 @@
+extends layout
+block content
+    .container
+        if errors
+            .alert.alert-danger #{errors}
+
+        form(method='post', action='/login')
+            .form-group
+                label(for='exampleInputEmail1') Username
+                input#exampleInputEmail1.form-control(type='text' name = 'name' aria-describedby='emailHelp')
+                small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+            .form-group
+                label(for='exampleInputPassword1') Password
+                input#exampleInputPassword1.form-control(type='password' name = 'pass')
+            .form-group.form-check
+                input#exampleCheck1.form-check-input(type='checkbox')
+                label.form-check-label(for='exampleCheck1') Check me out
+            .form-group
+                button.btn.btn-primary Submit
+        

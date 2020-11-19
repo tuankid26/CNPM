@@ -10,8 +10,13 @@ module.exports.getAllFeedbacks = function(req, res){
             console.log('err');
         }
         else {
-            //res.writeHead(200);
-            res.send(data);
+            console.log(data)
+            // recordset = []
+            // data.foreach(row => recordset.push)
+            res.render('../views/feedback', {
+                data: data
+            });
+            // res.send(data);
         }
     });
 

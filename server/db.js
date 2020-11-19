@@ -20,6 +20,7 @@ module.exports.executeQuery = function(query, callback){
         
         req.query(query).then(function(recordset){
             callback(recordset.recordset);
+            //callback(recordset);
         }).catch(function(err){
             console.log(err);
             callback(null, err);
