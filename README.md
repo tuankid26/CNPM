@@ -2,7 +2,7 @@
 # Start server
  cd server -->
  npm install -->
- npm start
+ npm start -->
  Request API: localhost:9000
 # Start client
   cd client -->
