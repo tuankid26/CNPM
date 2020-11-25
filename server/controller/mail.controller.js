@@ -28,6 +28,8 @@ module.exports.sendMail = function(req, res) {
         subject: 'Test Nodemailer',
         text: 'You recieved message from ' + req.body.name,
         // html: '<p>You have got a new message</b><ul><li>Username:' + req.body.name + '</li><li>Email:' + req.body.email + '</li><li>Username:' + req.body.message + '</li></ul>'
+        // Connected html
+        // Server email
     }
     transporter.sendMail(mailOptions, function(err, info){
         if (err) {
