@@ -4,11 +4,11 @@ var settings = require('./setting');
 tls.DEFAULT_MIN_VERSION = 'TLSv1';
 
 // const config = {
-//     user: 'sa',
-//     password: '123456',
+//     user: 'localhost',
+//     password: 'qweasdzxc',
 //     server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
-//     database: 'cnpm',
-//     port: 1433
+//     database: 'DB',
+//     port: 1413
 // }
 
 
