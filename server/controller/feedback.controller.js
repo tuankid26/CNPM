@@ -13,10 +13,10 @@ module.exports.getAllFeedbacks = function(req, res){
             console.log(data)
             // recordset = []
             // data.foreach(row => recordset.push)
-            res.render('../views/feedback', {
-                data: data
-            });
-            // res.send(data);
+            // res.render('../views/feedback', {
+            //     data: data
+            // });
+            res.send(data);
         }
     });
 

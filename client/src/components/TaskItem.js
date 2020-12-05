@@ -27,16 +27,21 @@ class TaskItem extends Component {
         return (
             <tr>
                 <td>{ this.props.index }</td>
+                <td>{ this.props.task.content }</td>
                 <td>{ this.props.task.name }</td>
                 <td className="text-center">
                     { this.showStatusElement() }
                 </td>
-                <td></td>
+                <td className="text-center">
+                    { this.props.task.month }
+                </td>
+                <td className="text-center">
+                    {Date()}
+                </td>
                 <td className="text-center">
                     <button type="button" className="btn btn-warning" onClick={ this.onSelectedItem }>
                         <span className="fa fa-pencil mr-5"></span>Sửa
                     </button>
-                    &nbsp;
                     <button type="button" className="btn btn-danger" onClick={ this.onDeleteItem }>
                         <span className="fa fa-trash mr-5"></span>Xóa
                     </button>

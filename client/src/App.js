@@ -12,6 +12,7 @@ class App extends Component {
             tasks : [],
             isDisplayForm : false,
             keyword : '',
+            filterContent : '',
             filterName : '',
             filterStatus : '-1',
             itemEditing : null,
@@ -110,8 +111,9 @@ class App extends Component {
         });
     }
 
-    onFilter = (filterName, filterStatus) => {
+    onFilter = (filterContent,filterName, filterStatus) => {
         this.setState({
+            filterContent:filterContent,
             filterName : filterName,
             filterStatus : filterStatus
         });
@@ -136,6 +138,7 @@ class App extends Component {
             tasks,
             isDisplayForm,
             keyword, filterName,
+            filterContent,
             filterStatus,
             itemEditing,
             sortBy,
@@ -145,7 +148,7 @@ class App extends Component {
         tasks = tasks.filter((task) => {
             return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
         });
-
+        
         if(filterName){
             tasks = tasks.filter((task) => {
                 return task.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
@@ -181,7 +184,7 @@ class App extends Component {
         return (
             <div className="container">
                 <div className="text-center">
-                    <h1>Quản Lý Phản Hồi</h1><hr/>
+                    <h1 >Quản Lý Phản Hồi</h1><hr/>
                 </div>
                 <div className="row">
                     <div className={ isDisplayForm === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : '' }>

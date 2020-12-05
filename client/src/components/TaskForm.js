@@ -11,6 +11,7 @@ class TaskForm extends Component {
         if(this.props.itemEditing && this.props.itemEditing.id !== null){
             this.setState({
                 id : this.props.itemEditing.id,
+                content:this.props.itemEditing.content,
                 name : this.props.itemEditing.name,
                 status : this.props.itemEditing.status
             });
@@ -23,6 +24,7 @@ class TaskForm extends Component {
         if(nextProps && nextProps.itemEditing){
             this.setState({
                 id : nextProps.itemEditing.id,
+                content : nextProps.itemEditing.content,
                 name : nextProps.itemEditing.name,
                 status : nextProps.itemEditing.status
             });
@@ -39,6 +41,7 @@ class TaskForm extends Component {
             [name] : value
         });
     }
+  
 
     onHandleSubmit = (event) => {
         event.preventDefault();
@@ -52,12 +55,27 @@ class TaskForm extends Component {
             id : '',
             name : '',
             status : false,
-            time:''
+            content:'',
+            time:'',
+            month:''
         });
     }
 
     onExitForm = () => {
         this.props.onExitForm();
+    }
+    
+    getTime () {
+        var date = new Date().getDate(); //Current Date
+        var month = new Date().getMonth() + 1; //Current Month
+        var year = new Date().getFullYear(); //Current Year
+        var hours = new Date().getHours(); //Current Hours
+        var min = new Date().getMinutes(); //Current Minutes
+        var sec = new Date().getSeconds(); //Current Seconds
+        var result= date + '/' + month + '/' + year 
+      + ' ' + hours + ':' + min + ':' + sec
+        // this.setState({[time] : result});
+        return result;
     }
 
     render() {
@@ -84,14 +102,32 @@ class TaskForm extends Component {
                                 onChange={ this.onHandleChange }
                             />
                         </div>
-                        <label>Time :</label>
-                        <input
-                                type="text"
-                                className="form-control"
-                                name="time"
-                                value={this.state.time}
-                                onChange={ this.onHandleChange }
-                            /><br/>
+                        <label>Tiêu đề :</label>
+                        <select
+                            className="form-control"
+                            value={this.state.content}
+                            onChange={this.onHandleChange}
+                            name="content"
+                        >
+                            <option value={'Môi Trường'}>Môi Trường</option>
+                            <option value={'An Ninh Trật Tự'}>An Ninh Trật tự</option>
+                            <option value={'Văn hóa'}>Văn hóa</option>
+                            <option value={'Các loại phí'}>Các loại phí</option>
+                            <option value={'Khác'}>Khác</option>
+                        </select><br/>
+                        <label>Quý :</label>
+                        <select
+                            className="form-control"
+                            value={this.state.month}
+                            onChange={this.onHandleChange}
+                            name="month"
+                        >
+                            <option value={'1'}>1</option>
+                            <option value={'2'}>2</option>
+                            <option value={'3'}>3</option>
+                            <option value={'4'}>4</option>
+                        </select><br/>
+                        
                         <label>Trạng Thái :</label>
                         <select
                             className="form-control"
@@ -103,9 +139,9 @@ class TaskForm extends Component {
                             <option value={false}>Đã xử lý</option>
                         </select><br/>
                         <div className="text-center">
-                            <button type="submit" className="btn btn-warning">
+                            <button type="submit" onClick={this.getTime} className="btn btn-warning">
                                 <span className="fa fa-plus mr-5"></span>Lưu Lại
-                            </button>&nbsp;
+                            </button>
                             <button type="button" onClick={ this.onClear } className="btn btn-danger">
                                 <span className="fa fa-close mr-5"></span>Hủy Bỏ
                             </button>
