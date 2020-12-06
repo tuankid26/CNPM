@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
-
+import axios from 'axios';
 class TaskList extends Component {
 
     constructor(props) {
@@ -8,10 +8,22 @@ class TaskList extends Component {
         this.state = {
             filterName:'',
             filterContent : '',
-            filterStatus : -1
+            filterStatus : -1,
+           
         };
     }
-
+    
+    componentDidMount() {
+        var url="http://localhost:9000/feedbacks"
+        fetch(url, {
+            method: "GET"
+        }).then(function(res) {
+            return res.json(); // chuyển chuỗi nhận được thành đối tượng json
+        }).then(function(data) {
+            // các lệnh xử lý cho dữ liệu ở đây: các công việc hiển thị.
+            console.log(data);
+        }) .catch(error => console.log(error));
+    }
     onChange = (event) => {
         var target = event.target;
         var name = target.name;
@@ -21,9 +33,10 @@ class TaskList extends Component {
             [name] : value
         });
     }
-  
+    
     
     render() {
+        
         var { tasks } = this.props;
         var elmTasks = tasks.map((task, index) => {
             return (
@@ -50,6 +63,7 @@ class TaskList extends Component {
                                 <th className="text-center">Quý</th>
                                 <th className="text-center">Time</th>
                                 <th className="text-center">Hành động</th>
+                                <th className="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,6 +100,7 @@ class TaskList extends Component {
                                         
                                     </select>
                                 </td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

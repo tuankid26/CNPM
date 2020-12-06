@@ -49,6 +49,9 @@ class TaskItem extends Component {
                         <span className="fa fa-google mr-5"></span>Gửi Mail
                     </button>
                 </td>
+                <td>
+                     <input checked="checked" name="gop" type="checkbox" />
+                </td>
             </tr>
         );
     }

@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,6 +11,10 @@ var mailRouter = require('./routers/sendMail.router');
 var loginRouter = require('./routers/login.router');
 var app = express();
 
+var corsOptions = {methods: 'GET,POST,PUT,DELETE,OPTIONS',
+optionsSuccessStatus: 200,
+origin: 'http://localhost:3000'
+}
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -19,6 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors(corsOptions));
+// app.options('*', cors());
 
 
 app.use('/feedbacks', feedbackRouter);

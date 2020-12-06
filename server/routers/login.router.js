@@ -1,5 +1,5 @@
 var express = require('express');
-var Router = express.router();
+var Router = express.Router();
 var db = require('../db');
 var loginController = require('../controller/login.controller');
 Router.get('/', function(req, res){

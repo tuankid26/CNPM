@@ -194,6 +194,9 @@ class App extends Component {
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm} >
                             <span className="fa fa-plus mr-5"></span>Thêm Phản Hồi
                         </button>
+                        <button type="button" className="btn btn-info" onClick={this.onToggleForm} >
+                            <span className="fa fa-plus mr-5"></span>Gộp phản ánh
+                        </button>
                         <TaskControl
                             onSearch={this.onSearch}
                             onSort={this.onSort}
