@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskControl from './components/TaskControl';
-
+import TaskDetail from './components/TaskDetail';
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             tasks : [],
+            taskID : "-1",
             isDisplayForm : false,
             keyword : '',
             filterContent : '',
@@ -22,12 +24,21 @@ class App extends Component {
     }
 
     componentWillMount() {
-        if(localStorage && localStorage.getItem('tasks')){
-            var tasks = JSON.parse(localStorage.getItem('tasks'));
-            this.setState({
-                tasks : tasks
-            });
-        }
+        // if(localStorage && localStorage.getItem('tasks')){
+        //     var tasks = JSON.parse(localStorage.getItem('tasks'));
+        axios.get(`http://localhost:9000/feedbacks`)
+        .then(res => {
+          const tasks = res.data;
+          this.setState({ tasks :tasks  });
+        })
+        .catch(error => console.log(error));
+    
+  
+   
+        // this.setState({
+        //         tasks : tasks
+        //     });
+        // }
     }
 
     s4() {
@@ -132,22 +143,30 @@ class App extends Component {
             sortValue : sortValue
         })
     }
+    onShowDetail = (id) => {
+        var index = this.findIndex(id);
+        console.log(index);
+        this.setState({
+            taskID: index
+        });
+    }
 
     render() {
         var {
             tasks,
             isDisplayForm,
-            keyword, filterName,
-            filterContent,
+            // keyword,
+             filterName,
             filterStatus,
             itemEditing,
             sortBy,
-            sortValue
+            sortValue,
+            taskID
         } = this.state;
 
-        tasks = tasks.filter((task) => {
-            return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
-        });
+        // tasks = tasks.filter((task) => {
+        //     return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+        // });
         
         if(filterName){
             tasks = tasks.filter((task) => {
@@ -181,11 +200,14 @@ class App extends Component {
                                                     onExitForm={this.onExitForm}
                                                     itemEditing={ itemEditing }
                                                     /> : '';
+                                                
+        var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
         return (
             <div className="container">
                 <div className="text-center">
                     <h1 >Quản Lý Phản Hồi</h1><hr/>
                 </div>
+                {detail}
                 <div className="row">
                     <div className={ isDisplayForm === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : '' }>
                         { elmForm }
@@ -193,9 +215,6 @@ class App extends Component {
                     <div className={ isDisplayForm === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12' }>
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm} >
                             <span className="fa fa-plus mr-5"></span>Thêm Phản Hồi
-                        </button>
-                        <button type="button" className="btn btn-info" onClick={this.onToggleForm} >
-                            <span className="fa fa-plus mr-5"></span>Gộp phản ánh
                         </button>
                         <TaskControl
                             onSearch={this.onSearch}
@@ -211,6 +230,7 @@ class App extends Component {
                             filterStatus={filterStatus}
                             onFilter={this.onFilter}
                             onSelectedItem={this.onSelectedItem}
+                            onShowDetail={this.onShowDetail}
                         />
                     </div>
                 </div>

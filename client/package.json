@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "async": "^2.5.0",
-    "express": "^4.16.1",
+    "axios": "^0.21.0",
     "fetch": "^1.1.0",
     "lodash": "^4.17.20",
-    "mssql": "^6.2.3",
-    "react": "^17.0.1",
+    "react": "^16.0.0",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^16.14.0",
-    "react-scripts": "^4.0.1",
-    "tedious": "^6.7.0"
+    "react-scripts": "1.0.14"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,7 +17,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:9000",
   "browserslist": {
     "production": [
       ">0.2%",

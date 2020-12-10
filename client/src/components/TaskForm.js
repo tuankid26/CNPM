@@ -146,7 +146,6 @@ class TaskForm extends Component {
                                 <span className="fa fa-close mr-5"></span>Hủy Bỏ
                             </button>
                         </div>
-                    
                     </form>
                 </div>
             </div>
