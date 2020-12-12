@@ -34,6 +34,8 @@ class TaskList extends Component {
                     onUpdateStatus={ this.props.onUpdateStatus }
                     onDeleteTask={ this.props.onDeleteTask }
                     onSelectedItem = { this.props.onSelectedItem }
+                    onShowDetail = {this.props.onShowDetail}
+                    onSendMail = {this.props.onSendMail}
                 />
             )
         });
