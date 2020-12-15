@@ -14,7 +14,7 @@ class App extends Component {
             tasks : [],
             taskID : "-1",
             isDisplayForm : false,
-            isDisplayMail : false,
+            isDisplayMail: false,
             keyword : '',
             filterContent : '',
             filterName : '',
@@ -22,27 +22,31 @@ class App extends Component {
             itemEditing : null,
             sortBy : 'name',
             sortValue : 1,
-            taskID: -1
+            taskID: -1,
+            hiddenSelect: true,
+            showMergeButton: false,
+            mergeIDs: [],
+            nguoiPhanAnh: []
         };
     }
  
-    // componentWillMount() {
-    //     // if(localStorage && localStorage.getItem('tasks')){
-    //     //     var tasks = JSON.parse(localStorage.getItem('tasks'));
-    //     axios.get(`http://localhost:9000/feedbacks`)
-    //     .then(res => {
-    //       const tasks = res.data;
-    //       this.setState({ tasks :tasks  });
-    //     })
-    //     .catch(error => console.log(error));
+    componentWillMount() {
+        // if(localStorage && localStorage.getItem('tasks')){
+        //     var tasks = JSON.parse(localStorage.getItem('tasks'));
+        axios.get(`http://localhost:9000/feedbacks`)
+        .then(res => {
+          const tasks = res.data;
+          this.setState({ tasks :tasks  });
+        })
+        .catch(error => console.log(error));
     
   
    
-    //     // this.setState({
-    //     //         tasks : tasks
-    //     //     });
-    //     // }
-    // }
+        // this.setState({
+        //         tasks : tasks
+        //     });
+        // }
+    }
 
     componentWillSend(){
         const mailObject = {
@@ -228,6 +232,45 @@ class App extends Component {
         });
     }
  
+
+    onMerge = () => {
+        var mergeIDs = this.state.mergeIDs;
+        var ids = ''; 
+        const params = new URLSearchParams();
+        params.append('id', mergeIDs);
+        for (let i = 0; i < mergeIDs.length; i++) {
+            if (i != mergeIDs.length - 1){
+                ids += 'id[]=' + mergeIDs[i] + '&';
+            }
+            else {
+                ids += 'id[]=' + mergeIDs[i];
+            }
+ 
+        }
+        console.log(mergeIDs);
+        var url = 'http://localhost:9000/feedbacks/merge';
+        
+        axios.post(url, {id : mergeIDs})
+        .then(res => {
+            console.log('success');
+            console.log(res);
+        })
+        .catch(error => {
+            console.log('error occured')
+            console.log(error);
+        }); 
+ 
+ 
+        this.setState({
+            showMergeButton : false,
+            hiddenSelect: true,
+            mergeIDs: [],
+        });
+ 
+        window.location.reload();
+ 
+    }
+
  
  
     render() {
@@ -236,12 +279,15 @@ class App extends Component {
             isDisplayForm,
             isDisplayMail,
             // keyword,
-             filterName,
+            filterName,
             filterStatus,
             itemEditing,
             sortBy,
             sortValue,
-            taskID
+            taskID,
+            hiddenSelect,
+            showMergeButton,
+            nhankhau
         } = this.state;
  
         // tasks = tasks.filter((task) => {
