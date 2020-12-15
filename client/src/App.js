@@ -4,12 +4,12 @@ import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskControl from './components/TaskControl';
-<<<<<<< HEAD
+
 // import TaskDetail from './components/TaskDetail';
-=======
+
 import TaskDetail from './components/TaskDetail';
 import TaskMail from './components/TaskMail';
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
 class App extends Component {
  
     constructor(props) {
@@ -52,9 +52,7 @@ class App extends Component {
         // }
     }
 
-<<<<<<< HEAD
 
-=======
     componentWillSend(){
         const mailObject = {
             content: this.state.content,
@@ -79,7 +77,7 @@ class App extends Component {
         return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
     }
  
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
     findIndex = (id) => {
         var { tasks } = this.state;
         var result = -1;
@@ -123,7 +121,7 @@ class App extends Component {
         // localStorage.setItem('tasks', JSON.stringify(tasks));
         var tasks = this.state.tasks;
         // data.status = data.status === 1 ? 1 : 0;
-<<<<<<< HEAD
+
         data.nguoiPhanAnh = 1;
         var date = new Date().getDate();
         var month = new Date().getMonth()+1;
@@ -137,13 +135,13 @@ class App extends Component {
             // data.id = this.guid();
             tasks.push(data);
             axios.post(`http://localhost:9000/feedbacks`, data)
-=======
+
         // data.nguoiPhanAnh = 1;
         if(data.id === ''){
             // data.id = this.guid();
             tasks.push(data);
             axios.post("http://localhost:9000/feedbacks", data)
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
             .then(res => {
             console.log(res);
             console.log(res.data);
@@ -155,11 +153,11 @@ class App extends Component {
         }else{
             var index = this.findIndex(data.id);
             tasks[index] = data;
-<<<<<<< HEAD
+
             axios.post(`http://localhost:9000/feedbacks/${index}`, data)
-=======
+
             axios.post("http://localhost:9000/feedbacks/update", data)
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
             .then(res => {
             console.log(res);
             console.log(res.data);
@@ -360,7 +358,8 @@ class App extends Component {
 
  
  
-    render() {
+    render() 
+    {
         var {
             tasks,
             isDisplayForm,
@@ -371,14 +370,12 @@ class App extends Component {
             itemEditing,
             sortBy,
             sortValue,
-<<<<<<< HEAD
-            // taskID
-=======
+
             taskID,
             hiddenSelect,
             showMergeButton,
             nhankhau
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
         } = this.state;
  
         // tasks = tasks.filter((task) => {
@@ -417,11 +414,10 @@ class App extends Component {
                                                     onExitForm={this.onExitForm}
                                                     itemEditing={ itemEditing }
                                                     /> : '';
-<<<<<<< HEAD
+
                                                 
         // var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
-=======
-        var mail = isDisplayMail === true ? <TaskMail
+     var mail = isDisplayMail === true ? <TaskMail
                                                     onExitMail={this.onExitMail}
                                                     itemEditing={ itemEditing } 
                                                     /> : '';
@@ -429,18 +425,14 @@ class App extends Component {
 
         var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
         console.log(detail);
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
         return (
             
             <div className="container">
                 <div className="text-center">
                     <h1 >Quản Lý Phản Hồi</h1><hr/>
                 </div>
-<<<<<<< HEAD
-                {/* {detail} */}
-=======
-                {}
->>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
+
                 <div className="row">
                     <div className={ isDisplayForm === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : '' }>
                         
@@ -489,5 +481,5 @@ class App extends Component {
         );
     }
 }
- 
+}
 export default App;
