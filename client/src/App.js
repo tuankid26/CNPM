@@ -399,7 +399,10 @@ class App extends Component {
                         <button type="button" className="btn btn-primary" onClick = {this.onShowSelect}>
                         
                             <span className="fa fa-plus mr-5"></span>Gộp phản hồi
-                            
+
+                        </button>
+                        <button type="button" className="btn btn-primary" style={{visibility: showMergeButton ? 'visible' :'hidden'}} onClick ={this.onMerge}>
+                            <span className="fa fa-done mr-5"></span>Hoàn thành
                         </button>
                         <TaskControl
                             onSearch={this.onSearch}

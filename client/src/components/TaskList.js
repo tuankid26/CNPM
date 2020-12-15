@@ -38,6 +38,7 @@ class TaskList extends Component {
                     onSendMail = {this.props.onSendMail}
                     nhankhau = {this.props.nhankhau}
                     hidden = {this.props.hidden}
+                    onCheck = {this.props.onCheck}
 
                 />
             )
