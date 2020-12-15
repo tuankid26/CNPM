@@ -29,6 +29,7 @@ class Login extends Component {
 		var user = this.state.user;
 		var password = this.state.password;
 		const data = {user:user, password: password};
+		console.log(data);
 		axios.post('http://localhost:9000/login', data)
 		.then(res => {
 			console.log(res.data);
@@ -64,12 +65,12 @@ class Login extends Component {
                       <span>OR</span>
                     </p> */}
 					{this.state.loginFailed ? 
-					<div class="alert alert-danger" role="alert">
+					<div className="alert alert-danger" role="alert">
   						Tài khoản/Mật khẩu không hợp lệ!
 					</div> : ''
 					}
 					{this.state.success ? 
-					<div class="alert alert-success" role="alert">
+					<div className="alert alert-success" role="alert">
 						<Redirect to='/home'/>
 				  	</div> : ''
 					}
