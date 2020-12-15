@@ -23,3 +23,8 @@ npm install
   npm start
 '''
 
+Start server trước khi start Client để load dữ liệu từ cơ sở dữ liệu tránh bảng rỗng. 
+Lưu ý : Cần tạo tài khoản trong SQL để kết nối tới cơ sở dữ liệu
+--> 	keyword : Tạo tài khoản 'sa' trong SQL
+
++ Sửa trong file db.js để config SQL
