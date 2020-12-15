@@ -23,12 +23,17 @@ module.exports.getAllFeedbacks = function(req, res){
 };
 
 module.exports.addFeedback = function(req, res){
-    var name = req.body.name;
+    console.log("ok");
+    var id = req.body.id;
+    var tieude=req.body.tieude;
+    var noiDung=req.body.noiDung;
+    var quy=req.body.quy;
     var time = req.body.time;
     var status = req.body.status;
-    db.executeQuery('INSERT INTO FEEDBACK VALUES (' + name + ', ' + time + ', ' + status + ')', function(err){
-        res.writeHead(500);
-        res.send(JSON.stringify(err));
+    var nguoiPhanAnh=req.body.nguoiPhanAnh;
+    console.log('INSERT INTO FEEDBACK VALUES (' +'\''+ tieude+'\''+', '+'\''+ noiDung+'\'' +', '+quy+', ' + '\'' + time + '\', ' +'\''+ status+'\'' + ', '+ nguoiPhanAnh + ')')
+    db.executeQuery('INSERT INTO FEEDBACK VALUES (' +'\''+ tieude+'\''+', '+'\''+ noiDung+'\'' +', '+quy+', ' + '\'' + time + '\', ' +'\''+ status+'\'' + ', '+ nguoiPhanAnh++ + ')', function(err){
+        res.send(err);
     });
 
 };
@@ -49,11 +54,12 @@ module.exports.findFeedback = function(req, res){
 
 module.exports.updateFeedback = function(req, res){
     var id = req.params.id;
-    var name = req.body.name;
-    var time = req.body.time;
+    var tieude = req.body.tieude;
+    var noiDung = req.body.noiDung;
     var status = req.body.status;
+    var time = req.body.time;
     db.executeQuery('UPDATE FEEDBACK \
-                    SET noiDung = ' + name + ', time = ' + time + ', status = ' + status
+                    SET noiDung = ' + noiDung + ', time = ' + time + ', status = ' + status
                     + 'WHERE id = ' + id, function(err){
                         res.send(err);
                     });

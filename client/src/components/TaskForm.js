@@ -11,8 +11,8 @@ class TaskForm extends Component {
         if(this.props.itemEditing && this.props.itemEditing.id !== null){
             this.setState({
                 id : this.props.itemEditing.id,
-                content:this.props.itemEditing.content,
-                name : this.props.itemEditing.name,
+                tieude:this.props.itemEditing.tieude,
+                noiDung: this.props.itemEditing.noiDung,
                 status : this.props.itemEditing.status
             });
         }else{
@@ -24,8 +24,8 @@ class TaskForm extends Component {
         if(nextProps && nextProps.itemEditing){
             this.setState({
                 id : nextProps.itemEditing.id,
-                content : nextProps.itemEditing.content,
-                name : nextProps.itemEditing.name,
+                tieude : nextProps.itemEditing.tieude,
+                noiDung : nextProps.itemEditing.noiDung,
                 status : nextProps.itemEditing.status
             });
         }else{
@@ -53,29 +53,17 @@ class TaskForm extends Component {
     onClear = () => {
         this.setState({
             id : '',
-            name : '',
-            status : false,
-            content:'',
+            tieude:'',
+            noiDung : '',
+            status : 0,
             time:'',
-            month:''
+            quy:'',
+            nguoiPhanAnh:0
         });
     }
 
     onExitForm = () => {
         this.props.onExitForm();
-    }
-    
-    getTime () {
-        var date = new Date().getDate(); //Current Date
-        var month = new Date().getMonth() + 1; //Current Month
-        var year = new Date().getFullYear(); //Current Year
-        var hours = new Date().getHours(); //Current Hours
-        var min = new Date().getMinutes(); //Current Minutes
-        var sec = new Date().getSeconds(); //Current Seconds
-        var result= date + '/' + month + '/' + year 
-      + ' ' + hours + ':' + min + ':' + sec
-        // this.setState({[time] : result});
-        return result;
     }
 
     render() {
@@ -97,17 +85,17 @@ class TaskForm extends Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                name="name"
-                                value={this.state.name}
+                                name="noiDung"
+                                value={this.state.noiDung}
                                 onChange={ this.onHandleChange }
                             />
                         </div>
                         <label>Tiêu đề :</label>
                         <select
                             className="form-control"
-                            value={this.state.content}
+                            value={this.state.tieude}
                             onChange={this.onHandleChange}
-                            name="content"
+                            name="tieude"
                         >
                             <option value={'Môi Trường'}>Môi Trường</option>
                             <option value={'An Ninh Trật Tự'}>An Ninh Trật tự</option>
@@ -118,9 +106,9 @@ class TaskForm extends Component {
                         <label>Quý :</label>
                         <select
                             className="form-control"
-                            value={this.state.month}
+                            value={this.state.quy}
                             onChange={this.onHandleChange}
-                            name="month"
+                            name="quy"
                         >
                             <option value={'1'}>1</option>
                             <option value={'2'}>2</option>
@@ -135,11 +123,11 @@ class TaskForm extends Component {
                             onChange={this.onHandleChange}
                             name="status"
                         >
-                            <option value={true}>Chưa xử lý</option>
-                            <option value={false}>Đã xử lý</option>
+                            <option value={0}>Chưa xử lý</option>
+                            <option value={1}>Đã xử lý</option>
                         </select><br/>
                         <div className="text-center">
-                            <button type="submit" onClick={this.getTime} className="btn btn-warning">
+                            <button type="submit" onClick={this.onHandleSubmit} className="btn btn-warning">
                                 <span className="fa fa-plus mr-5"></span>Lưu Lại
                             </button>
                             <button type="button" onClick={ this.onClear } className="btn btn-danger">

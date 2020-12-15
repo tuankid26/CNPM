@@ -12,7 +12,7 @@ router.route('/')
     .post(feedbackController.addFeedback);
 router.get('/search', feedbackController.findFeedback);
 router.route('/:id')
-    .put(feedbackController.updateFeedback)
+    .post(feedbackController.updateFeedback)
     .delete(feedbackController.deleteFeedback);
 
 

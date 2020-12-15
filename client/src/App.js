@@ -4,7 +4,7 @@ import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import TaskControl from './components/TaskControl';
-import TaskDetail from './components/TaskDetail';
+// import TaskDetail from './components/TaskDetail';
 class App extends Component {
 
     constructor(props) {
@@ -29,7 +29,7 @@ class App extends Component {
         axios.get(`http://localhost:9000/feedbacks`)
         .then(res => {
           const tasks = res.data;
-          this.setState({ tasks :tasks  });
+          this.setState({ tasks :tasks });
         })
         .catch(error => console.log(error));
     
@@ -41,13 +41,6 @@ class App extends Component {
         // }
     }
 
-    s4() {
-        return  Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    }
-
-    guid() {
-        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
-    }
 
     findIndex = (id) => {
         var { tasks } = this.state;
@@ -67,22 +60,66 @@ class App extends Component {
         this.setState({
             tasks : tasks
         });
+        // const test = {"id":10,"tieude":null,"noiDung":"nhà văn hóa ồn ào","quy":null,"time":"2020-10-10T00:00:00.000Z","status":"Đã xử lý","nguoiPhanAnh":5}
+        // axios.post(`http://localhost:9000/feedbacks`, {test })
+        // .then(res => {
+        //   console.log(res);
+        //   console.log(res.data);
+        // })
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
     onSave = (data) => {
         var tasks = this.state.tasks;
-        data.status = data.status === 'true' ? true : false;
+        // data.status = data.status === 1 ? 1 : 0;
+        data.nguoiPhanAnh = 1;
+        var date = new Date().getDate();
+        var month = new Date().getMonth()+1;
+        var year = new Date().getFullYear();
+
+        var time='' + month+'/' + date+'/' + year ;
+        data.time=time;
+        console.log(data.time);
+        
         if(data.id === ''){
-            data.id = this.guid();
+            // data.id = this.guid();
             tasks.push(data);
+            axios.post(`http://localhost:9000/feedbacks`, data)
+            .then(res => {
+            console.log(res);
+            console.log(res.data);
+      
+             })
+                .catch(err => {
+                    console.log("fail");
+                    console.log(err)})
         }else{
             var index = this.findIndex(data.id);
             tasks[index] = data;
+            axios.post(`http://localhost:9000/feedbacks/${index}`, data)
+            .then(res => {
+            console.log(res);
+            console.log(res.data);
+      
+             })
+                .catch(err => {
+                    console.log("fail");
+                    console.log(err)})
         }
         this.setState({
             tasks : tasks
         });
+        
+        
+        //   axios.post(`http://localhost:9000/feedbacks`, test)
+        //     .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+      
+        //      })
+        //         .catch(err => {
+        //             console.log("fail");
+        //             console.log(err)})
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
@@ -112,6 +149,12 @@ class App extends Component {
         this.setState({
             tasks : tasks
         });
+        axios.delete(`http://localhost:9000/feedbacks/${id}`)
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+        
         localStorage.setItem('tasks', JSON.stringify(tasks));
         this.onExitForm();
     }
@@ -161,7 +204,7 @@ class App extends Component {
             itemEditing,
             sortBy,
             sortValue,
-            taskID
+            // taskID
         } = this.state;
 
         // tasks = tasks.filter((task) => {
@@ -201,13 +244,13 @@ class App extends Component {
                                                     itemEditing={ itemEditing }
                                                     /> : '';
                                                 
-        var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
+        // var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
         return (
             <div className="container">
                 <div className="text-center">
                     <h1 >Quản Lý Phản Hồi</h1><hr/>
                 </div>
-                {detail}
+                {/* {detail} */}
                 <div className="row">
                     <div className={ isDisplayForm === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : '' }>
                         { elmForm }
