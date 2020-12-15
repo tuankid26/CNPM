@@ -62,9 +62,7 @@ class TaskItem extends Component {
                         <span className="fa fa-google" data-toggle="tooltip" title="Gửi mail"></span>
                     </button>
                     
-                    <button type="button" className="btn btn-info" onClick = {this.onShowDetail} >
-                        <span className="fa fa-info-circle" data-toggle="tooltip" title="Chi tiết"></span>
-                    </button>
+                    <TaskDetail task = {this.props.task} onShowDetail = {this.props.onShowDetail} nhankhau = {this.props.nhankhau}/>
                     
                 </td>
             </tr>

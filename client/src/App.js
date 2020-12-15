@@ -105,6 +105,47 @@ class App extends Component {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    onShowSelect = () => {
+        this.setState({
+            hiddenSelect: false
+        });
+    }
+ 
+    onCheck = (event) => {
+        var mergeIDs = this.state.mergeIDs;
+        var id = event.target.id;
+        console.log(id);
+        var checked = event.target.checked;
+        if (checked) {
+            mergeIDs.push(id);
+        }
+        else {
+            var index = mergeIDs.indexOf(id);
+            mergeIDs.splice(index, 1);
+        }
+        this.setState({
+            showMergeButton : mergeIDs.length > 1 ? true : false,
+            mergeIDs: mergeIDs
+        });
+    }
+    onShowDetail = (event) => {
+        var id = event.target.id;
+        console.log(id);
+        console.log('http://localhost:9000/feedbacks/search?id=' + id)
+        axios.get('http://localhost:9000/feedbacks/search?id=' + id)
+        .then(res => {
+            console.log(res);
+            const nhankhau = res.data;
+            var tmp = []
+            nhankhau.forEach(person => tmp.push(person.hoten));    
+            this.setState({ nhankhau :tmp });
+        })
+        .catch(error => console.log(error));
+    }
+
+
+
+
 
     onSend = (data) => {
         var tasks = this.state.tasks

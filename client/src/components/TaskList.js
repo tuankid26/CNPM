@@ -36,6 +36,7 @@ class TaskList extends Component {
                     onSelectedItem = { this.props.onSelectedItem }
                     onShowDetail = {this.props.onShowDetail}
                     onSendMail = {this.props.onSendMail}
+                    nhankhau = {this.props.nhankhau}
                 />
             )
         });
