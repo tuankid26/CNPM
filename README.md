@@ -1,10 +1,25 @@
-# Quản lý phản ánh/kiến nghị
-# Start server
- cd server -->
- npm install -->
- npm start -->
- Request API: localhost:9000
-# Start client
-  cd client -->
-  npm install -->
+## Quản lý phản ánh/kiến nghị
+
+## Cài đặt môi trường
+Window 10\
+Node 14.15.1\
+Npm 6.14.8\
+Sql server management studio 2019
+
+## Cài đặt package Npm
+```bash
+npm install
+
+```
+
+## Start server
+'''bash
+ cd server
+ npm start
+'''
+## Start client
+'''bash
+  cd client
   npm start
+'''
+
