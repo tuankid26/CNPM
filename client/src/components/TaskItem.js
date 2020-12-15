@@ -65,6 +65,7 @@ class TaskItem extends Component {
                     <TaskDetail task = {this.props.task} onShowDetail = {this.props.onShowDetail} nhankhau = {this.props.nhankhau}/>
                     
                 </td>
+                <td className="mr-5" hidden={this.props.hidden}><input type="checkbox" id={this.props.task.id} onChange={this.props.onCheck}/>    &nbsp;   </td>
             </tr>
         );
     }

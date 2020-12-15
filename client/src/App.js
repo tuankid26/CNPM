@@ -94,18 +94,61 @@ class App extends Component {
     }
  
     onSave = (data) => {
+        // var tasks = this.state.tasks;
+        // data.status = data.status === 'true' ? true : false;
+        // if(data.id === ''){
+        //     data.id = this.guid();
+        //     tasks.push(data);
+        // }else{
+        //     var index = this.findIndex(data.id);
+        //     tasks[index] = data;
+        // }
+        // this.setState({
+        //     tasks : tasks
+        // });
+        // localStorage.setItem('tasks', JSON.stringify(tasks));
         var tasks = this.state.tasks;
-        data.status = data.status === 'true' ? true : false;
+        // data.status = data.status === 1 ? 1 : 0;
+        // data.nguoiPhanAnh = 1;
         if(data.id === ''){
-            data.id = this.guid();
+            // data.id = this.guid();
             tasks.push(data);
+            axios.post("http://localhost:9000/feedbacks", data)
+            .then(res => {
+            console.log(res);
+            console.log(res.data);
+      
+             })
+                .catch(err => {
+                    console.log("fail");
+                    console.log(err)})
         }else{
             var index = this.findIndex(data.id);
             tasks[index] = data;
+            axios.post("http://localhost:9000/feedbacks/update", data)
+            .then(res => {
+            console.log(res);
+            console.log(res.data);
+      
+             })
+                .catch(err => {
+                    console.log("fail");
+                    console.log(err)})
         }
         this.setState({
             tasks : tasks
         });
+        
+        
+        //   axios.post(http://localhost:9000/feedbacks, test)
+        //     .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+      
+        //      })
+        //         .catch(err => {
+        //             console.log("fail");
+        //             console.log(err)})
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
@@ -353,9 +396,10 @@ class App extends Component {
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm} >
                             <span className="fa fa-plus mr-5"></span>Thêm Phản Hồi
                         </button>
-                        <button type="button" className="btn btn-primary" >
+                        <button type="button" className="btn btn-primary" onClick = {this.onShowSelect}>
                         
                             <span className="fa fa-plus mr-5"></span>Gộp phản hồi
+                            
                         </button>
                         <TaskControl
                             onSearch={this.onSearch}
@@ -373,6 +417,9 @@ class App extends Component {
                             onSelectedItem={this.onSelectedItem}
                             onShowDetail =  {this.onShowDetail}
                             onSendMail = {this.onSendMail}
+                            hidden = {hiddenSelect}
+                            onCheck = {this.onCheck}
+                            nhankhau = {nhankhau}
  
                         />
                     </div>

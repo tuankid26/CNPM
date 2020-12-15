@@ -37,6 +37,8 @@ class TaskList extends Component {
                     onShowDetail = {this.props.onShowDetail}
                     onSendMail = {this.props.onSendMail}
                     nhankhau = {this.props.nhankhau}
+                    hidden = {this.props.hidden}
+
                 />
             )
         });
@@ -54,6 +56,7 @@ class TaskList extends Component {
                                 <th className="text-center">Quý</th>
                                 <th className="text-center">Time</th>
                                 <th className="text-center">Hành động</th>
+                                <th hidden = {this.props.hidden} className="text-center">Chọn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,6 +96,7 @@ class TaskList extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td hidden = {this.props.hidden}></td>
                             </tr>
                             { elmTasks }
                         </tbody>
