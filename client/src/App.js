@@ -278,19 +278,19 @@ class App extends Component {
 
     onMerge = () => {
         var mergeIDs = this.state.mergeIDs;
-        var ids = ''; 
-        const params = new URLSearchParams();
-        params.append('id', mergeIDs);
-        for (let i = 0; i < mergeIDs.length; i++) {
-            if (i != mergeIDs.length - 1){
-                ids += 'id[]=' + mergeIDs[i] + '&';
-            }
-            else {
-                ids += 'id[]=' + mergeIDs[i];
-            }
+        // var ids = ''; 
+        // const params = new URLSearchParams();
+        // params.append('id', mergeIDs);
+        // for (let i = 0; i < mergeIDs.length; i++) {
+        //     if (i != mergeIDs.length - 1){
+        //         ids += 'id[]=' + mergeIDs[i] + '&';
+        //     }
+        //     else {
+        //         ids += 'id[]=' + mergeIDs[i];
+        //     }
  
-        }
-        console.log(mergeIDs);
+        // }
+        // console.log(mergeIDs);
         var url = 'http://localhost:9000/feedbacks/merge';
         
         axios.post(url, {id : mergeIDs})
@@ -310,7 +310,7 @@ class App extends Component {
             mergeIDs: [],
         });
  
-        window.location.reload();
+        //window.location.reload();
  
     }
 

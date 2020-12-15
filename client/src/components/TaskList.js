@@ -43,7 +43,6 @@ class TaskList extends Component {
                 />
             )
         });
-        console.log(elmTasks);
         return (
             <div className="row mt-15">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-md-12 col-lg-12">

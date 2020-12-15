@@ -10,7 +10,6 @@ module.exports.getAllFeedbacks = function(req, res){
             console.log('err');
         }
         else {
-            console.log(data)
             // recordset = []
             // data.foreach(row => recordset.push)
             // res.render('../views/feedback', {
@@ -64,4 +63,31 @@ module.exports.deleteFeedback = function(req, res){
     db.executeQuery('DELETE FROM FEEDBACK WHERE id = ' + id, function(err){
         res.send(err);
     });
+};
+
+module.exports.mergeFeedBacks = function(req, res){
+    var ids = req.body.id;
+    console.log(ids);
+    var firstID = ids[0];
+    var query = 'UPDATE MAPPING SET id_feedback = ' + firstID + ' WHERE id_feedback IN (';
+    for (i = 0; i < ids.length; i++){
+        if (i != ids.length - 1){
+            query += ids[i] + ', ';
+        }
+        else {
+            query += ids[i] + ')';
+        }
+    }
+
+    console.log(query);
+    db.executeQuery(query, function(err, data){
+        if (err){
+            res.send(err);
+        }
+        else {
+            res.send(data);
+        }
+
+    })
+    
 };
