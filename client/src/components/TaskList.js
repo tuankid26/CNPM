@@ -34,10 +34,19 @@ class TaskList extends Component {
                     onUpdateStatus={ this.props.onUpdateStatus }
                     onDeleteTask={ this.props.onDeleteTask }
                     onSelectedItem = { this.props.onSelectedItem }
+                    onShowDetail = {this.props.onShowDetail}
+                    onSendMail = {this.props.onSendMail}
+                    nhankhau = {this.props.nhankhau}
+                    hidden = {this.props.hidden}
+                    onCheck = {this.props.onCheck}
+
                 />
             )
         });
+<<<<<<< HEAD
      
+=======
+>>>>>>> 17a8df7ce7f9e4e1e6fc87f63860d164e71d24c7
         return (
             <div className="row mt-15">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-xs-12 col-md-12 col-lg-12">
@@ -51,6 +60,7 @@ class TaskList extends Component {
                                 <th className="text-center">Quý</th>
                                 <th className="text-center">Time</th>
                                 <th className="text-center">Hành động</th>
+                                <th hidden = {this.props.hidden} className="text-center">Chọn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,6 +100,7 @@ class TaskList extends Component {
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td hidden = {this.props.hidden}></td>
                             </tr>
                             { elmTasks }
                         </tbody>
