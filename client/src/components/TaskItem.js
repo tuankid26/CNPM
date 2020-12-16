@@ -43,7 +43,7 @@ class TaskItem extends Component {
                     { this.props.task.quy }
                 </td>
                 <td className="text-center">
-                    {this.props.task.thoigian}
+                    {this.props.task.time}
                 </td>
                 <td className="text-center">
                     <button type="button" className="btn btn-warning" onClick={ this.onSelectedItem }>

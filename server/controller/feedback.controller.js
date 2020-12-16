@@ -2,15 +2,16 @@ const { json, query } = require('express');
 var db = require('../db');
 "use strict";
 module.exports.getAllFeedbacks = function(req, res){
-    var feedbacks = []
-    db.executeQuery('SELECT id, title, noiDung, FORMAT(time, \'dd-MM-yyyy\') AS thoigian, quy, status  FROM FEEDBACK\
+    db.executeQuery('SELECT id, title, noiDung, FORMAT(time, \'dd-MM-yyyy\') AS time, quy, status  FROM FEEDBACK\
                     WHERE id IN(SELECT id_feedback FROM MAPPING)', function(data, err){
         if (err){
             console.log('err here');
             console.log(err);
         }
         else {
-            feedbacks = data;
+            var feedbacks = data;
+            var id_feedback = data.id;
+            
             res.send(data);
         }
     });
@@ -18,7 +19,7 @@ module.exports.getAllFeedbacks = function(req, res){
 
 module.exports.addFeedback = function(req, res){
     // var id = req.body.id;
-    var title = req.body.tieude;
+    var title = req.body.title;
     var content = req.body.noiDung;
     var time = req.body.time;
     var quy = req.body.quy;
@@ -103,7 +104,7 @@ module.exports.findNhanKhau = function(req, res){
 
 module.exports.updateFeedback = function(req, res){
     var id = req.body.id;
-    var title = req.body.tieude;
+    var title = req.body.title;
     var noiDung = req.body.noiDung;
     var time = req.body.time;
     var quy = req.body.quy;

@@ -1,5 +1,6 @@
 import React,  {Component}  from 'react';
-import Popup from 'reactjs-popup'
+import Popup from 'reactjs-popup';
+import '../App.css';
  
 class TaskDetail extends Component{
   constructor(props) {
@@ -14,8 +15,8 @@ class TaskDetail extends Component{
   render(){
  
     var nhankhau = this.props.nhankhau;
-    console.log(nhankhau);
- 
+    // console.log(nhankhau);
+    // console.log(this.props.task);
  
     // var list = [];
     //nhankhau.forEach(person => list.push(person.hoten));

@@ -26,7 +26,7 @@ class TaskMain extends Component {
             hiddenSelect: true,
             showMergeButton: false,
             mergeIDs: [],
-            nguoiPhanAnh: []
+            nhankhau: []
         };
     }
  
@@ -90,12 +90,7 @@ class TaskMain extends Component {
         this.setState({
             tasks : tasks
         });
-        // const test = {"id":10,"tieude":null,"noiDung":"nhà văn hóa ồn ào","quy":null,"time":"2020-10-10T00:00:00.000Z","status":"Đã xử lý","nguoiPhanAnh":5}
-        // axios.post(`http://localhost:9000/feedbacks`, {test })
-        // .then(res => {
-        //   console.log(res);
-        //   console.log(res.data);
-        // })
+
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
  
@@ -119,7 +114,7 @@ class TaskMain extends Component {
                 // console.log(res);
                 // console.log(res.data);
                 data.id = res.data.id;
-                console.log(data.id);
+                console.log(data);
                 window.location.reload();
       
              })
@@ -144,6 +139,7 @@ class TaskMain extends Component {
         this.setState({
             tasks : tasks
         });
+        
         
         
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -268,6 +264,7 @@ class TaskMain extends Component {
     }
     onShowDetail = (event) => {
         var id = event.target.id;
+        console.log(event.target);
         console.log(id);
         console.log('http://localhost:9000/feedbacks/search?id=' + id)
         axios.get('http://localhost:9000/feedbacks/search?id=' + id)
@@ -316,21 +313,31 @@ class TaskMain extends Component {
  
  
     render() {
-        var {
-            tasks,
-            isDisplayForm,
-            isDisplayMail,
-            // keyword,
-            filterName,
-            filterStatus,
-            itemEditing,
-            sortBy,
-            sortValue,
-            taskID,
-            hiddenSelect,
-            showMergeButton,
-            nhankhau
-        } = this.state;
+        var tasks = this.state.tasks;
+        var isDisplayForm = this.state.isDisplayForm;
+        var filterName = this.state.filterName;
+        var filterStatus = this.state.filterStatus;
+        var itemEditing = this.state.itemEditing;
+        var sortBy = this.state.sortBy;
+        var sortValue = this.state.sortValue;
+        var hiddenSelect = this.state.hiddenSelect;
+        var showMergeButton = this.state.showMergeButton;
+        var nhankhau = this.state.nhankhau;
+        // var {
+        //     tasks,
+        //     isDisplayForm,
+            
+        //     // keyword,
+        //     filterName,
+        //     filterStatus,
+        //     itemEditing,
+        //     sortBy,
+        //     sortValue,
+        //     taskID,
+        //     hiddenSelect,
+        //     showMergeButton,
+        //     nhankhau
+        // } = this.state;
  
         // tasks = tasks.filter((task) => {
         //     return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;

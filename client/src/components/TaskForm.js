@@ -11,7 +11,7 @@ class TaskForm extends Component {
         if(this.props.itemEditing && this.props.itemEditing.id !== null){
             this.setState({
                 id : this.props.itemEditing.id,
-                tieude:this.props.itemEditing.title,
+                title :this.props.itemEditing.title,
                 noiDung: this.props.itemEditing.noiDung,
                 quy: this.props.itemEditing.quy,
                 nguoiPhanAnh: this.props.itemEditing.nguoiPhanAnh,
@@ -27,7 +27,7 @@ class TaskForm extends Component {
         if(nextProps && nextProps.itemEditing){
             this.setState({
                 id : nextProps.itemEditing.id,
-                tieude : nextProps.itemEditing.title,
+                title : nextProps.itemEditing.title,
                 noiDung : nextProps.itemEditing.noiDung,
                 quy: nextProps.itemEditing.quy,
                 nguoiPhanAnh: nextProps.itemEditing.nguoiPhanAnh,
@@ -58,7 +58,7 @@ class TaskForm extends Component {
     onClear = () => {
         this.setState({
             id : '',
-            tieude:'',
+            title:'',
             noiDung : '',
             status : 0,
             time:'',
@@ -98,9 +98,9 @@ class TaskForm extends Component {
                         <label>Tiêu đề :</label>
                         <select
                             className="form-control"
-                            value={this.state.tieude}
+                            value={this.state.title}
                             onChange={this.onHandleChange}
-                            name="tieude"
+                            name="title"
                         >
                             <option value={'Môi Trường'}>Môi Trường</option>
                             <option value={'An Ninh Trật Tự'}>An Ninh Trật tự</option>

@@ -8,17 +8,7 @@ class TaskMail extends Component{
     this.state = {show : false};
   }
 
-//   componentWillMount() {
-//     if(this.props.itemEditing && this.props.itemEditing.id !== null){
-//         this.setState({
-//             email : this.props.itemEditing.email,
-//             content:this.props.itemEditing.content,
-//             title : this.props.itemEditing.title,
-//         });
-//     }else{
-//         this.onClear();
-//     }
-// }
+
 
     Mail_Send(){
     const mailObject = {
@@ -136,14 +126,14 @@ onExitMail = () => {
                             <button type="submit" onClick={this.getTime} className="btn btn-warning">
                                 <span className="fa fa-plus mr-5"></span>Gửi email
                             </button>
-                            <button type="button" onClick={ this.onClear } className="btn btn-danger">
+                            <button type="button" onClick={ () => {close();} } className="btn btn-danger">
                                 <span className="fa fa-close mr-5"></span>Hủy Bỏ
                             </button>
                         </div>
                     </form>
                 </div>
             
-            <div className="actions">
+            {/* <div className="actions">
     
               <button
                 className="button"
@@ -153,7 +143,7 @@ onExitMail = () => {
               >
                 Đóng
               </button>
-            </div>
+            </div> */}
           </div>
         )}
       </Popup>

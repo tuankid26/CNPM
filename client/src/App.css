@@ -71,12 +71,13 @@
 }
 
 .custom_modal {
-    font-size: 12px;
-    background-color: rgba(150,150,150,0.8); 
+    font-size: 18px;
+    width: 100%;
+    background-color: rgb(212, 205, 194); 
   }
   .custom_modal > .header {
     width: 100%;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(182, 178, 178);
     font-size: 18px;
     text-align: center;
     padding: 5px;
