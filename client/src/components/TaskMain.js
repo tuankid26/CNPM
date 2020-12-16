@@ -100,42 +100,42 @@ class TaskMain extends Component {
     }
  
     onSave = (data) => {
-        // var tasks = this.state.tasks;
-        // data.status = data.status === 'true' ? true : false;
-        // if(data.id === ''){
-        //     data.id = this.guid();
-        //     tasks.push(data);
-        // }else{
-        //     var index = this.findIndex(data.id);
-        //     tasks[index] = data;
-        // }
-        // this.setState({
-        //     tasks : tasks
-        // });
-        // localStorage.setItem('tasks', JSON.stringify(tasks));
         var tasks = this.state.tasks;
         // data.status = data.status === 1 ? 1 : 0;
         // data.nguoiPhanAnh = 1;
+        var date = new Date().getDate();
+        var month = new Date().getMonth();
+        var year = new Date().getFullYear();
+
+        var time='' + month+'/' + date+'/' + year ;
+        data.time=time;
+        console.log(data.time);
+
         if(data.id === ''){
             // data.id = this.guid();
             tasks.push(data);
-            axios.post("http://localhost:9000/feedbacks", data)
+            axios.post(`http://localhost:9000/feedbacks`, data)
             .then(res => {
-            console.log(res);
-            console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
+                data.id = res.data.id;
+                console.log(data.id);
+                window.location.reload();
       
              })
-                .catch(err => {
-                    console.log("fail");
-                    console.log(err)})
+            .catch(err => {
+                console.log("fail");
+                console.log(err)
+            })
         }else{
             var index = this.findIndex(data.id);
             tasks[index] = data;
-            axios.post("http://localhost:9000/feedbacks/update", data)
+            console.log(data);
+            axios.post(`http://localhost:9000/feedbacks/update`, data)
             .then(res => {
-            console.log(res);
-            console.log(res.data);
-      
+                console.log(res);
+                console.log(res.data);
+                window.location.reload();
              })
                 .catch(err => {
                     console.log("fail");
@@ -146,15 +146,6 @@ class TaskMain extends Component {
         });
         
         
-        //   axios.post(http://localhost:9000/feedbacks, test)
-        //     .then(res => {
-        //     console.log(res);
-        //     console.log(res.data);
-      
-        //      })
-        //         .catch(err => {
-        //             console.log("fail");
-        //             console.log(err)})
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
@@ -231,13 +222,14 @@ class TaskMain extends Component {
     }
  
     onDeleteTask = (id) => {
+        console.log(id);
         var { tasks } = this.state;
         var index = this.findIndex(id);
         tasks.splice(index, 1);
         this.setState({
             tasks : tasks
         });
-        axios.delete(`http://localhost:9000/feedbacks/${id}`)
+        axios.post('http://localhost:9000/feedbacks/delete', {id: id})
         .then(res => {
           console.log(res);
           console.log(res.data);
@@ -274,12 +266,19 @@ class TaskMain extends Component {
             sortValue : sortValue
         })
     }
-    onShowDetail = (id) => {
-        var index = this.findIndex(id);
-        console.log(index);
-        this.setState({
-            taskID: index
-        });
+    onShowDetail = (event) => {
+        var id = event.target.id;
+        console.log(id);
+        console.log('http://localhost:9000/feedbacks/search?id=' + id)
+        axios.get('http://localhost:9000/feedbacks/search?id=' + id)
+        .then(res => {
+            console.log(res);
+            const nhankhau = res.data;
+            var tmp = []
+            nhankhau.forEach(person => tmp.push(person.hoten));    
+            this.setState({ nhankhau :tmp });
+        })
+        .catch(error => console.log(error));
     }
     onSendMail = () =>{
         this.setState({
@@ -290,19 +289,7 @@ class TaskMain extends Component {
 
     onMerge = () => {
         var mergeIDs = this.state.mergeIDs;
-        // var ids = ''; 
-        // const params = new URLSearchParams();
-        // params.append('id', mergeIDs);
-        // for (let i = 0; i < mergeIDs.length; i++) {
-        //     if (i != mergeIDs.length - 1){
-        //         ids += 'id[]=' + mergeIDs[i] + '&';
-        //     }
-        //     else {
-        //         ids += 'id[]=' + mergeIDs[i];
-        //     }
- 
-        // }
-        // console.log(mergeIDs);
+
         var url = 'http://localhost:9000/feedbacks/merge';
         
         axios.post(url, {id : mergeIDs})
@@ -322,7 +309,7 @@ class TaskMain extends Component {
             mergeIDs: [],
         });
  
-        //window.location.reload();
+        window.location.reload();
  
     }
 
@@ -381,14 +368,14 @@ class TaskMain extends Component {
                                                     onExitForm={this.onExitForm}
                                                     itemEditing={ itemEditing }
                                                     /> : '';
-        var mail = isDisplayMail === true ? <TaskMail
-                                                    onExitMail={this.onExitMail}
-                                                    itemEditing={ itemEditing } 
-                                                    /> : '';
+        // var mail = isDisplayMail === true ? <TaskMail
+        //                                             onExitMail={this.onExitMail}
+        //                                             itemEditing={ itemEditing } 
+        //                                             /> : '';
+        // console.log(isDisplayForm)
 
-
-        var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
-        console.log(detail);
+        // var detail = taskID !== -1 ? <TaskDetail task = {tasks[taskID]}/> : '';
+        // console.log(detail);
         return (
             
             <div className="container">
@@ -401,8 +388,6 @@ class TaskMain extends Component {
                         
                         { elmForm }
                     </div>
-                    {detail}
-                    {mail}
                     
                     <div className={ isDisplayForm === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12' }>
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm} >

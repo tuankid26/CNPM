@@ -10,10 +10,8 @@ router.route('/')
     //     res.render('../views/feedback');
     // })
     .post(feedbackController.addFeedback);
-router.get('/search', feedbackController.findFeedback);
-// router.route('/:id')
-//     .put(feedbackController.updateFeedback)
-//     .delete(feedbackController.deleteFeedback);
+router.get('/search', feedbackController.findNhanKhau);
+
 
 router.post('/update', feedbackController.updateFeedback);
 router.post('/delete', feedbackController.deleteFeedback);

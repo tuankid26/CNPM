@@ -87,8 +87,7 @@ onExitMail = () => {
     return(
         <Popup
         trigger={ <button type="button" className="btn btn-primary" onClick = {this.onSendMail}>
-            Gửi Email phản hồi
-
+            <span className="fa fa-google" data-toggle="tooltip" title="Gửi email"></span>
       </button>}
         modal
         nested
@@ -99,7 +98,7 @@ onExitMail = () => {
             <button className="close" onClick={close}>
               &times;
             </button>
-            <div className="header"> Gửi email </div>
+            <div className="header"> Gửi phản hồi qua email</div>
 
 
             <div className="panel-body">
@@ -123,30 +122,6 @@ onExitMail = () => {
                             onChange={ this.onHandleChange }
                         />
 
-                        {/* <select
-                            className="form-control"
-                            value={this.state.content}
-                            onChange={this.onHandleChange}
-                            name="content"
-                        >
-                            <option value={'Môi Trường'}>Môi Trường</option>
-                            <option value={'An Ninh Trật Tự'}>An Ninh Trật tự</option>
-                            <option value={'Văn hóa'}>Văn hóa</option>
-                            <option value={'Các loại phí'}>Các loại phí</option>
-                            <option value={'Khác'}>Khác</option>
-                        </select><br/> */}
-                        {/* <label>Quý :</label>
-                        <select
-                            className="form-control"
-                            value={this.state.month}
-                            onChange={this.onHandleChange}
-                            name="month"
-                        >
-                            <option value={'1'}>1</option>
-                            <option value={'2'}>2</option>
-                            <option value={'3'}>3</option>
-                            <option value={'4'}>4</option>
-                        </select><br/> */}
                         
                         <label>Email nhận :</label>
                         <input
@@ -157,15 +132,6 @@ onExitMail = () => {
                             onChange={ this.onHandleChange }
                         />
 
-                        {/* <select
-                            className="form-control"
-                            value={this.state.status}
-                            onChange={this.onHandleChange}
-                            name="status"
-                        >
-                            <option value={true}>Chưa xử lý</option>
-                            <option value={false}>Đã xử lý</option>
-                        </select><br/> */}
                         <div className="text-center">
                             <button type="submit" onClick={this.getTime} className="btn btn-warning">
                                 <span className="fa fa-plus mr-5"></span>Gửi email

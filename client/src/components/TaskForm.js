@@ -1,38 +1,43 @@
 import React, { Component } from 'react';
-
+ 
 class TaskForm extends Component {
-
+ 
     constructor(props) {
         super(props);
         this.state = {};
     }
-
+ 
     componentWillMount() {
         if(this.props.itemEditing && this.props.itemEditing.id !== null){
             this.setState({
                 id : this.props.itemEditing.id,
-                tieude:this.props.itemEditing.tieude,
+                tieude:this.props.itemEditing.title,
                 noiDung: this.props.itemEditing.noiDung,
+                quy: this.props.itemEditing.quy,
+                nguoiPhanAnh: this.props.itemEditing.nguoiPhanAnh,
                 status : this.props.itemEditing.status
+
             });
         }else{
             this.onClear();
         }
     }
-
+ 
     componentWillReceiveProps(nextProps) {
         if(nextProps && nextProps.itemEditing){
             this.setState({
                 id : nextProps.itemEditing.id,
-                tieude : nextProps.itemEditing.tieude,
+                tieude : nextProps.itemEditing.title,
                 noiDung : nextProps.itemEditing.noiDung,
+                quy: nextProps.itemEditing.quy,
+                nguoiPhanAnh: nextProps.itemEditing.nguoiPhanAnh,
                 status : nextProps.itemEditing.status
             });
         }else{
             this.onClear();
         }
     }
-
+ 
     onHandleChange = (event) => {
         var target = event.target;
         var name = target.name;
@@ -42,14 +47,14 @@ class TaskForm extends Component {
         });
     }
   
-
+ 
     onHandleSubmit = (event) => {
         event.preventDefault();
         this.props.onSave(this.state);
         this.onClear();
         this.onExitForm();
     }
-
+ 
     onClear = () => {
         this.setState({
             id : '',
@@ -58,14 +63,14 @@ class TaskForm extends Component {
             status : 0,
             time:'',
             quy:'',
-            nguoiPhanAnh:0
+            nguoiPhanAnh:''
         });
     }
-
+ 
     onExitForm = () => {
         this.props.onExitForm();
     }
-
+ 
     render() {
         return (
             <div className="panel panel-warning">
@@ -101,6 +106,9 @@ class TaskForm extends Component {
                             <option value={'An Ninh Trật Tự'}>An Ninh Trật tự</option>
                             <option value={'Văn hóa'}>Văn hóa</option>
                             <option value={'Các loại phí'}>Các loại phí</option>
+                            <option value={'Chính sách'}>Chính sách</option>
+                            <option value={'Cơ sở vật chất'}>Cơ sở vật chát</option>
+                            <option value={'Đất đai'}>Đất đai</option>
                             <option value={'Khác'}>Khác</option>
                         </select><br/>
                         <label>Quý :</label>
@@ -115,7 +123,16 @@ class TaskForm extends Component {
                             <option value={'3'}>3</option>
                             <option value={'4'}>4</option>
                         </select><br/>
-                        
+                        <div className="form-group">
+                            <label>Người phản ánh:</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="nguoiPhanAnh"
+                                value={this.state.nguoiPhanAnh}
+                                onChange={ this.onHandleChange }
+                            />
+                        </div>
                         <label>Trạng Thái :</label>
                         <select
                             className="form-control"
@@ -140,5 +157,5 @@ class TaskForm extends Component {
         );
     }
 }
-
+ 
 export default TaskForm;
