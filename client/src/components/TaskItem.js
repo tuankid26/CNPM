@@ -6,9 +6,9 @@ class TaskItem extends Component {
     showStatusElement(){
         return (
             <span
-                className={ this.props.task.status === "Đang xử lý" ? 'label label-danger' : 'label label-info' }
+                className={ this.props.task.status === 0 ? 'label label-danger' : 'label label-info' }
                 onClick={ this.onUpdateStatus }
-            >{ this.props.task.status === "Đang xử lý"  ? 'Chưa xử lý' : 'Đã xử lý' }</span>
+            >{ this.props.task.status === 0  ? 'Chưa xử lý' : 'Đã xử lý' }</span>
         );
     }
 
@@ -36,7 +36,7 @@ class TaskItem extends Component {
                 <td>{ this.props.index }</td>
                 <td>{ this.props.task.title }</td>
                 <td>{ this.props.task.noiDung }</td>
-                <td className="text-center">
+                <td className="text-center" >
                     { this.showStatusElement() }
                 </td>
                 <td className="text-center">

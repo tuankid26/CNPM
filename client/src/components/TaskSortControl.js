@@ -21,20 +21,20 @@ class TaskSortControl extends Component {
                         Sắp Xếp <span className="fa fa-caret-square-o-down ml-5"></span>
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li onClick={ () => this.onClick('name', 1) }>
+                        <li onClick={ () => this.onClick('title', 1) }>
                             <a
                                 role="button"
-                                className={(this.props.sortBy === 'name' && this.props.sortValue === 1) ? 'sort_selected' : ''}
+                                className={(this.props.sortBy === 'title' && this.props.sortValue === 1) ? 'sort_selected' : ''}
                             >
                                 <span className="fa fa-sort-alpha-asc pr-5">
                                     Tên A-Z
                                 </span>
                             </a>
                         </li>
-                        <li onClick={ () => this.onClick('name', -1) }>
+                        <li onClick={ () => this.onClick('title', -1) }>
                             <a
                                 role="button"
-                                className={(this.props.sortBy === 'name' && this.props.sortValue === -1) ? 'sort_selected' : ''}
+                                className={(this.props.sortBy === 'title' && this.props.sortValue === -1) ? 'sort_selected' : ''}
                             >
                                 <span className="fa fa-sort-alpha-desc pr-5">
                                     Tên Z-A

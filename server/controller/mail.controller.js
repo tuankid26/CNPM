@@ -21,12 +21,12 @@ module.exports.sendMail = function(req, res) {
         // tls:{
         //     rejectUnauthorized: false
         // }
-    });
+    });console.log(req.body);
     var mailOptions = { // thiết lập đối tượng, nội dung gửi mail
         //from: req.body.name,
         to: req.body.email,
-        subject: 'Test Nodemailer',
-        text: 'You recieved message from ' + req.body.name,
+        subject: req.body.title,
+        text: req.body.content,
         // html: '<p>You have got a new message</b><ul><li>Username:' + req.body.name + '</li><li>Email:' + req.body.email + '</li><li>Username:' + req.body.message + '</li></ul>'
         // Connected html
         // Server email

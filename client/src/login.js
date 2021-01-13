@@ -50,20 +50,13 @@ class Login extends Component {
 	}
     render() {
         return (
-            <div className="container-fluid">
-            <div className="row  justify-content-center align-items-center d-flex-row text-center h-100">
-              <div className="col-12 col-md-4 col-lg-3   h-50 ">
-                <div className="card shadow">
-                  <div className="card-body mx-auto">
-                    <h4 className="card-title mt-3 text-center">Quản lý phản hồi</h4>
-                    {/* <p classname="text-center">Get started with your free account</p> */}
-                    {/* <p>
-                      <a href classname="btn btn-block btn-danger">
-                        <i classname="fab fa-google mr-2" />Login via Google</a>
-                    </p>
-                    <p classname="text-muted font-weight-bold ">
-                      <span>OR</span>
-                    </p> */}
+            <section className="login-block">		
+				<div className="container">
+  					<div className="row">
+    			<div className="col-md-4 login-sec">
+      			<h2 className="text-center">Login Now</h2>
+      			<form className="login-form">
+        			<div className="form-group">               
 					{this.state.loginFailed ? 
 					<div className="alert alert-danger" role="alert">
   						Tài khoản/Mật khẩu không hợp lệ!
@@ -71,34 +64,44 @@ class Login extends Component {
 					}
 					{this.state.success ? 
 					<div className="alert alert-success" role="alert">
-						<Redirect to='/home'/>
+						<Redirect to='/home' />
+						{/* <Redirect to={
+							{
+								pathname: '/home',
+								state: {success: true}
+							}
+						}/> */}
 				  	</div> : ''
 					}
                     <form onSubmit = {this.handleSubmit}>
+
                       <div className="form-group input-group">
                         <div className="input-group-prepend">
-                          <span className="input-group-text"> <i className="fa fa-user" /> </span>
+                          <span className="fa fa-user" ></span>
+						  <label> UserName</label>
                         </div>
                         <input name="user" className="form-control" placeholder="Tài khoản" type="text" onChange={this.handleChange} />
                       </div>
+					
                       <div className="form-group input-group">
                         <div className="input-group-prepend">
                           <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+						  <label> Password</label>
                         </div>
                         <input name="pass" className="form-control" placeholder="Mật khẩu" type="password" onChange={this.handleChange}/>
-                      </div>
-                      <div className="form-group">
-						  {/* <Link to="/home"> */}
-						  	<button type="submit" className="btn btn-primary btn-block" > Đăng nhập </button>
-						  {/* </Link> */}
-                      </div>
+                      	</div>
+					  
+					<div className="form-check">
+        				<button type="submit" className="btn btn-login float-right">Đăng nhập</button>
+      				</div>
+                     
                     </form>
                   </div>
-                </div>
+					</form>
               </div>
             </div>
           </div>
-		  
+		  </section>
         );
     }
     

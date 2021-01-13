@@ -13,6 +13,7 @@ class App extends Component{
         return(
             <Router>
                 <Switch>
+                    {/* <Route path='/home' render={(props) => <TaskMain{...props}/>}/> */}
                     <Route path='/home'><TaskMain/></Route>
                     <Route path='/'><Login/></Route>
                 </Switch>

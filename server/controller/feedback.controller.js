@@ -2,8 +2,10 @@ const { json, query } = require('express');
 var db = require('../db');
 "use strict";
 module.exports.getAllFeedbacks = function(req, res){
+    console.log('SELECT id, title, noiDung, FORMAT(time, \'dd-MM-yyyy\') AS time, quy, status  FROM FEEDBACK\
+    WHERE id IN(SELECT id_feedback FROM MAPPING) ORDER BY FEEDBACK.time DESC');
     db.executeQuery('SELECT id, title, noiDung, FORMAT(time, \'dd-MM-yyyy\') AS time, quy, status  FROM FEEDBACK\
-                    WHERE id IN(SELECT id_feedback FROM MAPPING)', function(data, err){
+                    WHERE id IN(SELECT id_feedback FROM MAPPING) ORDER BY FEEDBACK.time DESC', function(data, err){
         if (err){
             console.log('err here');
             console.log(err);
@@ -11,7 +13,7 @@ module.exports.getAllFeedbacks = function(req, res){
         else {
             var feedbacks = data;
             var id_feedback = data.id;
-            
+            console.log(data);
             res.send(data);
         }
     });
@@ -116,26 +118,51 @@ module.exports.updateFeedback = function(req, res){
             console.log('id_nhankhau' + id_nhankhau);
             console.log('UPDATE FEEDBACK \
             SET title = N' + '\'' + title + '\''  + ', noiDung = N' + '\'' + noiDung + '\'' + ', time = ' + '\'' + time + '\'' + ', quy =' + quy + ', status = ' + status
-            + 'WHERE id = ' + id);
+            + ' WHERE id = ' + id);
             console.log('UPDATE MAPPING SET id_feedback = ' + id + ', id_nhankhau = ' + id_nhankhau);
-            db.executeQuery('UPDATE FEEDBACK \
-                    SET title = N' + '\'' + title + '\''  + ', noiDung = N' + '\'' + noiDung + '\'' + ', time = ' + '\'' + time + '\'' + ', quy =' + quy + ', status = ' + status
-                    + ' WHERE id = ' + id, function(err){
-                        if(err){
-                            res.send(err);
-                        }           
-            });
-            db.executeQuery('UPDATE MAPPING SET id_feedback = ' + id + ', id_nhankhau = ' + id_nhankhau + 'WHERE id_feedback = ' + id, function(err){
+            // db.executeQuery('UPDATE FEEDBACK \
+            //         SET title = N' + '\'' + title + '\''  + ', noiDung = N' + '\'' + noiDung + '\'' + ', time = ' + '\'' + time + '\'' + ', quy =' + quy + ', status = ' + status
+            //         + ' WHERE id = ' + id, function(err){
+            //             if(err){
+            //                 res.send(err);
+            //             }           
+            // });
+            db.executeQuery('UPDATE MAPPING SET id_feedback = ' + id + ', id_nhankhau = ' + id_nhankhau + ' WHERE id_feedback = ' + id, function(err){
                 if (err){
                     res.send(err);
                 }
             });
+            db.executeQuery('UPDATE FEEDBACK \
+            SET title = N' + '\'' + title + '\''  + ', noiDung = N' + '\'' + noiDung + '\'' + ', time = ' + '\'' + time + '\'' + ', quy =' + quy + ', status = ' + status
+            + ' WHERE id = ' + id, function(err){
+                if(err){
+                    res.send(err);
+                }           
+    });
         }
         else{
             console.log(err);
         }
     })
     
+};
+
+module.exports.updateStatus = function(req, res){
+    // console.log(req.body);
+    var id = req.body.id;
+    var status =req.body.status;
+    console.log(id);
+    // console.log('DELETE FROM MAPPING WHERE id_feedback = ' + id);
+    // console.log('DELETE FROM FEEDBACK WHERE id = ' + id);
+    console.log('UPDATE FEEDBACK SET ' + ' status = ' + status
+        + ' WHERE id = ' + id)
+    db.executeQuery('UPDATE FEEDBACK SET ' + ' status = ' + status
+    + ' WHERE id = ' + id, function(err){
+        if(err){
+            res.send(err);
+        }           
+});
+
 };
 
 module.exports.deleteFeedback = function(req, res){

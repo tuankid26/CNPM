@@ -1,6 +1,6 @@
 import React,  {Component}  from 'react';
 import Popup from 'reactjs-popup';
-import '../App.css';
+import './TaskDetail.css';
  
 class TaskDetail extends Component{
   constructor(props) {
@@ -31,19 +31,26 @@ class TaskDetail extends Component{
       >
     
         {close => (
-          
-          <div className="custom_modal">
-            <div className="header"> Thông tin phản ánh </div>
-            <div className="content">
-              Tiêu đề: {this.props.task.title}
+           <div className="modal-content">
+           <div className="modal-header">
+             <button type="button" className="close" onClick={close} data-dismiss="modal">×</button>
+             <h3 className="modal-title">Thông tin chi tiết </h3>
+           </div>
+           <div className="modal-body">
+             <label>Tiêu đề :</label><br />
+             {this.props.task.title}
               <br/>
-              Nội dung: {this.props.task.noiDung}
+              <label>Nội dung :</label><br />
+              {this.props.task.noiDung}
               <br />
-              Thời gian: {this.props.task.thoigian}
+              <label>Thời gian :</label>
+               {this.props.task.time}
               <br/>
-              Trạng thái: {this.props.task.status ? "Đã xử lý" : "Đang xử lý"}
+              <label>Trạng thái :</label>
+               {this.props.task.status ? "Đã xử lý" : "Đang xử lý"}
               <br/>
-              Người phản ánh: {nhankhau ? nhankhau.length : ''}
+              <label>Người phản ánh :</label>
+               {nhankhau ? nhankhau.length : ''}
               <br/> 
               <ul>
               {nhankhau ? nhankhau.map(person => <li>{person}</li>) : ''}
@@ -52,15 +59,16 @@ class TaskDetail extends Component{
             </div>
             <div className="actions">
  
-              <button
-                className="button"
+              {/* <button
+                className="btn btn-danger"
                 onClick={() => {
                   close();
                 }}
               >
                 Đóng
-              </button>
+              </button> */}
             </div>
+          
           </div>
         )}
       </Popup>  

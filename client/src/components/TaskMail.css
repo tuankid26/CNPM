@@ -1,0 +1,15 @@
+
+.container-box
+{
+	display:inline-block; 
+	padding:120px; 
+	background: rgba(0, 0, 0, .5);
+	border: 1px solid #333;	
+	
+}
+.modal-content{
+	width: 600px;
+	height: 500px;
+}
+
+

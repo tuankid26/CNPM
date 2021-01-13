@@ -7,8 +7,9 @@ class TaskList extends Component {
         super(props);
         this.state = {
             filterName:'',
-            filterContent : '',
-            filterStatus : -1
+            filterContent : -1,
+            filterStatus : -1,
+            filterQuy : -1
         };
     }
 
@@ -16,7 +17,12 @@ class TaskList extends Component {
         var target = event.target;
         var name = target.name;
         var value = target.type === 'checkbox' ? target.checked : target.value;
-        this.props.onFilter(name === 'filterName' ? value : this.state.filterName, name === 'filterStatus' ? value : this.state.filterStatus);
+        this.props.onFilter(
+        name === 'filterContent' ? value : this.state.filterContent ,
+        name === 'filterName' ? value : this.state.filterName,
+        name === 'filterStatus' ? value : this.state.filterStatus,
+        name === "filterQuy" ? value :this.state.filterQuy);
+            
         this.setState({
             [name] : value
         });
@@ -25,6 +31,7 @@ class TaskList extends Component {
     
     render() {
         var tasks  = this.props.tasks;
+       
         var elmTasks = tasks.map((task, index) => {
             return (
                 <TaskItem
@@ -63,13 +70,22 @@ class TaskList extends Component {
                             <tr>
                                 <td></td>
                                 <td>
-                                <input
-                                        type="text"
+                                <select
                                         className="form-control"
                                         name="filterContent"
                                         onChange={ this.onChange }
-                                        value={ this.state.filerName }
-                                    />
+                                        value={ this.state.filterContent }
+                                    >   
+                                        <option value={-1}>Tất cả</option>
+                                        <option value={1}>Môi trường</option>
+                                        <option value={2}>An ninh trật tự</option>
+                                        <option value={3}>Văn hóa</option>
+                                        <option value={4}>Các loại phí</option>
+                                        <option value={5}>Chính sách </option>
+                                        <option value={7}>Đất đai</option>
+                                        <option value={6}>Cơ sở vật chất</option>
+                                        <option value={8}>Khác</option>
+                                    </select>
                                 </td>
                                 <td>
                                     <input
@@ -85,15 +101,28 @@ class TaskList extends Component {
                                         className="form-control"
                                         name="filterStatus"
                                         onChange={ this.onChange }
-                                        value={ this.state.filerName }
-                                    >   <option value={0}>Đã xử lý</option>
+                                        value={ this.state.filterStatus }
+                                    >   
                                         <option value={-1}>Tất Cả</option>
-                                        {/* <option value={0}>Đã xử lý</option> */}
-                                        <option value={1}>Chưa xử lý</option>
+                                        <option value={1}>Đã xử lý</option>
+                                        <option value={0}>Chưa xử lý</option>
                                         
                                     </select>
                                 </td>
-                                <td></td>
+                                <td>
+                                <select
+                                        className="form-control"
+                                        name="filterQuy"
+                                        onChange={ this.onChange }
+                                        value={ this.state.filterQuy }
+                                    >   
+                                        <option value={-1}>Tất cả </option>
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                    </select>
+                                </td>
                                 <td></td>
                                 <td></td>
                                 <td hidden = {this.props.hidden}></td>

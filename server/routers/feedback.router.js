@@ -12,7 +12,7 @@ router.route('/')
     .post(feedbackController.addFeedback);
 router.get('/search', feedbackController.findNhanKhau);
 
-
+router.post('/updateStatus',feedbackController.updateStatus);
 router.post('/update', feedbackController.updateFeedback);
 router.post('/delete', feedbackController.deleteFeedback);
 router.post('/merge', feedbackController.mergeFeedBacks);
