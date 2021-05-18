@@ -4,9 +4,6 @@ var settings = require('./setting');
 tls.DEFAULT_MIN_VERSION = 'TLSv1';
 
 
-
-
-
 module.exports.executeQuery = function(query, callback){
     var conn = new sql.ConnectionPool(settings.dbConfig);
     conn.connect().then(function(){
